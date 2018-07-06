@@ -19,8 +19,8 @@ const parse = (
   text?: string = '',
   elements?: FuncObj,
   components?: FuncObj,
-  markedOptions?: Object,
   marksyOptions?: Object,
+  markedOptions?: Object = { breaks: true },
   createElement?: any = reactCreateElement
 ): ReactNode => {
   const { tree } = marksy({
