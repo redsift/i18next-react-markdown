@@ -1,0 +1,7 @@
+{
+  "javascript.validate.enable": false,
+  "flow.useNPMPackagedFlow": true, // Potential security risk (runs Flow code on opening project)
+  "flow.pathToFlow": "${workspaceRoot}/node_modules/.bin/flow",
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+}
