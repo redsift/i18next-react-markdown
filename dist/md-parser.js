@@ -16,25 +16,24 @@ var _components2 = _interopRequireDefault(_components);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var parse = function parse() {
-  var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  var elements = arguments[1];
-  var components = arguments[2];
-  var markedOptions = arguments[3];
-  var marksyOptions = arguments[4];
-  var createElement = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _react.createElement;
+var createParser = function createParser(elements, components, marksyOptions) {
+  var markedOptions = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : { breaks: true };
+  var createElement = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _react.createElement;
 
-  var _marksy = (0, _components2.default)((0, _extends3.default)({
+  var m = (0, _components2.default)((0, _extends3.default)({
     /* Virtual DOM lib element creator */
     createElement: createElement,
 
     /* HTML element and React component overrides */
     elements: elements,
     components: components
-  }, marksyOptions))(text, markedOptions),
-      tree = _marksy.tree;
+  }, marksyOptions));
 
-  return tree;
+  return function () {
+    var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    var markedOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { breaks: true };
+    return m(text, markedOverride || markedOptions).tree;
+  };
 };
 
-exports.default = parse;
+exports.default = createParser;

@@ -8,6 +8,7 @@ import type { Node as ReactNode } from 'react';
 export type Attributes = {
   id?: string,
   children?: ReactNode,
+  className?: string
 };
 
 type FuncObj = { [string]: Attributes => ReactNode };
@@ -15,15 +16,14 @@ type FuncObj = { [string]: Attributes => ReactNode };
 export type ParseParams =
   (string | void, FuncObj | void, FuncObj | void, Object | void, Object | void, any) => ReactNode;
 
-const parse = (
-  text?: string = '',
+const createParser = (
   elements?: FuncObj,
   components?: FuncObj,
   marksyOptions?: Object,
   markedOptions?: Object = { breaks: true },
   createElement?: any = reactCreateElement
-): ReactNode => {
-  const { tree } = marksy({
+) => {
+  const m = marksy({
     /* Virtual DOM lib element creator */
     createElement,
 
@@ -31,9 +31,9 @@ const parse = (
     elements,
     components,
     ...marksyOptions
-  })(text, markedOptions);
+  });
 
-  return tree;
+  return (text?: string = '', markedOverride?: Object = { breaks: true }): ReactNode => m(text, markedOverride || markedOptions).tree;
 };
 
-export default parse;
+export default createParser;

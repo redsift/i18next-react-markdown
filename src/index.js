@@ -6,7 +6,7 @@ type Options = {
   __markdown: ?boolean,
 };
 
-const markdownProcessor = (parser?: ParseParams = parseMd) => ({
+const markdownProcessor = (parser?: ParseParams = parseMd()) => ({
   type: 'postProcessor',
   name: 'react-markdown',
   process(value: string, key: string, options: Options) {

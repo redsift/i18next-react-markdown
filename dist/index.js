@@ -12,7 +12,7 @@ var _mdParser2 = _interopRequireDefault(_mdParser);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var markdownProcessor = function markdownProcessor() {
-  var parser = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _mdParser2.default;
+  var parser = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0, _mdParser2.default)();
   return {
     type: 'postProcessor',
     name: 'react-markdown',
