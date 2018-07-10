@@ -3,13 +3,21 @@
   "private": true,
   "version": "0.0.1",
   "description": "Embed React elements using markdown in i18next translation strings",
-  "main": "dist/index.js",
+  "module": "dist/i18next-react-markdown.esm.js",
+  "jsnext:main": "dist/i18next-react-markdown.esm.js",
+  "main": "dist/i18next-react-markdown.umd.min.js",
+  "browser": "dist/i18next-react-markdown.umd.min.js",
+  "esnext": "src/index.js",
   "scripts": {
     "test": "npm run lint",
-    "build": "babel src/ -d dist/",
+    "uninstall": "rm -rf node_modules",
+    "clean": "rm -rf dist/",
+    "build:rollup": "rollup-bundler bundle.config.js",
+    "build:flow": "echo \"//@flow\n\nexport * from '../src';\" > dist/index.js.flow",
+    "build": "npm run clean && mkdir dist && npm run build:flow && npm run build:rollup",
     "lint": "eslint 'src/**/*.{jsx,js}'",
     "start": "start-storybook -p 9001 -c .storybook",
-    "storybook": "build-storybook -c .storybook -o private-docs",
+    "storybook": "build-storybook -c .storybook -o docs",
     "prepublish": "npm run build",
     "flow": "flow"
   },
@@ -25,8 +33,10 @@
   },
   "homepage": "https://github.com/redsift/i18next-react-markdown#readme",
   "devDependencies": {
+    "@redsift/rollup-bundler": "^0.5.3",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.5",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -39,11 +49,13 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.0",
     "eslint-plugin-react": "^7.10.0",
-    "flow-bin": "^0.61.0"
+    "flow-bin": "^0.61.0",
+    "flow-typed": "^2.5.1"
   },
   "dependencies": {
     "@storybook/addon-actions": "^3.4.8",
     "@storybook/react": "^3.4.8",
+    "babelrc-rollup": "^3.0.0",
     "marksy": "^6.0.3",
     "react": "^15.6.2",
     "react-copy-to-clipboard": "^5.0.1",
@@ -51,6 +63,7 @@
     "styled-components": "^3.3.3"
   },
   "peerDependencies": {
-    "react": "15.x"
+    "react": "15.x",
+    "marksy": "6.x"
   }
 }
