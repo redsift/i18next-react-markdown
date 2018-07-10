@@ -1,6 +1,7 @@
 // @flow
 
 import { createElement as reactCreateElement } from 'react';
+// $FlowFixMe
 import marksy from 'marksy/components';
 
 import type { Node as ReactNode } from 'react';

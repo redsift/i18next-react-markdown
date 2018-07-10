@@ -9,6 +9,6 @@
   "rules": {
     "no-underscore-dangle": "warn",
     "comma-dangle": ["error", "never"],
-    "react/require-default-props": "warn"
+    "react/require-default-props": "never"
   }
 }

@@ -2,6 +2,7 @@
 
 import React from 'react';
 
+// $FlowFixMe
 import styled from 'styled-components';
 
 type Props = {
@@ -20,6 +21,10 @@ const TextArea = styled.textarea`
   border-radius: 3px;
   padding: 16px;
   width: 100%;
+
+  &:focus {
+    border-color: blue;
+  }
 `;
 
 class TextInput extends React.Component<Props, State> {
