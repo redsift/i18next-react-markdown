@@ -23,7 +23,7 @@ npm start
 #### Build storybook
 
 ```sh
-npm run storybook
+npm run storybook:build
 ```
 
 > outputs static storybook site to `docs/`
