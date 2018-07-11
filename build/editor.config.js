@@ -3,6 +3,11 @@ const path = require('path');
 const cwd = process.cwd();
 
 module.exports = {
+  input: './Editor',
+  output: {
+    file: 'dist/editor.js',
+    name: 'MarkdownEditor'
+  },
   pluginConfigs: {
     babel: {
       presets: [

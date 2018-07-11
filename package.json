@@ -8,15 +8,17 @@
   "browser": "dist/i18next-react-markdown.umd.min.js",
   "esnext": "src/index.js",
   "scripts": {
+    "start": "npm run storybook",
     "test": "npm run lint",
     "uninstall": "rm -rf node_modules",
     "clean": "rm -rf dist/",
-    "build:rollup": "rollup-bundler bundle.config.js",
-    "build:flow": "echo \"//@flow\n\nexport * from '../src';\" > dist/index.js.flow",
-    "build": "npm run clean && mkdir dist && npm run build:flow && npm run build:rollup",
+    "build:rollup": "rollup-bundler build/index.config.js",
+    "build:editor": "rollup-bundler build/editor.config.js",
+    "build:flow": "echo \"//@flow\n\nexport * from '../src';\n\nexport * from '../Editor';\" > dist/index.js.flow",
+    "build": "npm run clean && mkdir dist && npm run build:flow && npm run build:rollup && npm run build:editor",
     "lint": "eslint 'src/**/*.{jsx,js}'",
-    "start": "start-storybook -p 9001 -c .storybook",
-    "storybook": "build-storybook -c .storybook -o docs",
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "storybook:build": "build-storybook -c .storybook -o docs",
     "prepublish": "npm run build",
     "flow": "flow"
   },
@@ -24,9 +26,9 @@
     "type": "git",
     "url": "git+https://github.com/redsift/i18next-react-markdown.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["i18next", "markdown"],
+  "author": "macintoshhelper <github@macintoshhelper.com> (https://github.com/macintoshhelper)",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/redsift/i18next-react-markdown/issues"
   },
