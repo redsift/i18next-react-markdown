@@ -76,6 +76,8 @@ i18n
 ## Editor usage
 
 ```js
+import Editor from 'i18next-react-markdown/Editor';
+
 return (
   <Editor elements={elements} components={components} />
 )
