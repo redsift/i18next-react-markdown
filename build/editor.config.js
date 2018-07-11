@@ -3,9 +3,9 @@ const path = require('path');
 const cwd = process.cwd();
 
 module.exports = {
-  input: './Editor',
+  input: path.join(cwd, 'Editor'),
   output: {
-    file: 'dist/editor.js',
+    file: path.join(cwd, 'dist/editor.js'),
     name: 'MarkdownEditor'
   },
   pluginConfigs: {
