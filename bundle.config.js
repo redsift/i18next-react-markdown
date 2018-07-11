@@ -25,6 +25,16 @@ module.exports = {
       exclude: 'node_modules/**',
       runtimeHelpers: true,
       babelrc: false
+    },
+    resolve: {
+      extensions: ['.mjs', '.js', '.jsx', '.json'],
+      jsnext: true
+    },
+    commonjs: {
+      namedExports: {
+        'node_modules/react-is/index.js': ['isValidElementType'],
+        'node_modules/react-copy-to-clipboard/lib/index.js': ['CopyToClipboard']
+      }
     }
   },
   external: ['react', 'marksy/components']
