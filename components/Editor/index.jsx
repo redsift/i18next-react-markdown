@@ -6,22 +6,33 @@ import React from 'react';
 // $FlowFixMe
 import styled from 'styled-components';
 
-import { parser as createMdParser } from '../../src';
+import createMdParser from '../../src/md-parser';
 
 import TextInput from '../TextInput';
-import Card from '../Card';
+import Card, { CardActions } from '../Card';
 import Copy from '../Copy';
+import Button from '../Button';
+import CardPrimary from '../Card/CardPrimary';
+import CardSecondary from '../Card/CardSecondary';
 
 const Row = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: row;
-  margin-top: 24px;
+  margin-top: 32px;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex: 1;
+  ${({ margin }) => margin && `margin: ${margin};`}
 `;
 
 
 type Props = {
   t: Function,
+  elements?: Object,
+  components?: Object
 };
 
 type State = {
@@ -32,14 +43,14 @@ type State = {
 class Editor extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    // const { elements, components } = props;
+    const { elements, components } = props;
 
     this.state = {
       rawMarkdown: '',
       editing: false
     };
 
-    this.mdParser = createMdParser();
+    this.mdParser = createMdParser(elements, components);
   }
 
 
@@ -73,36 +84,36 @@ class Editor extends React.Component<Props, State> {
     const value = JSON.stringify((lines.length === 1) ? rawMarkdown : lines, null, 2);
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div>
         <Row>
-          <div style={{ flex: 1, margin: 24, marginTop: 0 }}>
+          <Container margin="0px 32px">
             <TextInput
               textArea
               onChange={this.onTextChange}
               value={rawMarkdown}
               placeholder={placeholder}
             />
-          </div>
-          <div style={{ flex: 1, width: 0 }}>
+          </Container>
+          <Container margin="0px 32px 0px 0px">
             <Card style={{ flex: 1 }}>
-              {rawMarkdown
-                ? mdParser(rawMarkdown)
-                : (
-                  <h2>
-                    Markdown Preview
-                  </h2>
-                )
-              }
+              <CardPrimary>
+                <h2>
+                  Markdown Preview
+                </h2>
+              </CardPrimary>
+              <CardSecondary>
+                <div className="markdown-body">
+                  {rawMarkdown
+                    ? mdParser(rawMarkdown)
+                    : null
+                  }
+                </div>
+              </CardSecondary>
             </Card>
-          </div>
+          </Container>
         </Row>
-        <div>
+        <Container margin="32px">
           <Card>
-            <div>
-              <button type="button" onClick={() => this.setState({ editing: !editing })}>
-                edit
-              </button>
-            </div>
             {editing
               ? (
                 <TextInput
@@ -118,8 +129,13 @@ class Editor extends React.Component<Props, State> {
                 />
               )
             }
+            <CardActions>
+              <Button type="button" onClick={() => this.setState({ editing: !editing })}>
+                edit
+              </Button>
+            </CardActions>
           </Card>
-        </div>
+        </Container>
       </div>
     );
   }

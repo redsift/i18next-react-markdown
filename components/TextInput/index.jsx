@@ -20,7 +20,7 @@ const TextArea = styled.textarea`
   border: 1px solid gray;
   border-radius: 3px;
   padding: 16px;
-  width: 100%;
+  flex: 1;
 
   &:focus {
     border-color: blue;

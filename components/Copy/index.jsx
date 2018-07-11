@@ -5,40 +5,52 @@ import React from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styled from 'styled-components';
 
-const Code = styled.pre`
+import Button from '../Button';
+
+const CodeContainer = styled.div`
   padding: 16px;
   overflow: auto;
   background-color: #f6f8fa;
   border-radius: 3px;
+  display: flex;
+  flex-direction: row;
 `;
 
-const Button = styled.button`
-  background-color: white;
-  border-radius: 3px;
-  padding: 2px 0px 2px 4px;
+const Column = styled.div`
+  display: flex;
+  align-items: center;
   margin-right: 16px;
-  border: 1px solid gray;
+`;
+
+const EmojiContainer = styled.div`
+  position: relative;
+  right: -2px;
+  font-size: 1rem;
 `;
 
 const Copy = ({ value, resolvedOnCopy }: { value: string, resolvedOnCopy?: Function }) => (
   <div>
-    <div title={value}>
-      <Code>
-        <CopyToClipboard
-          text={value}
-          onCopy={resolvedOnCopy || undefined}
-        >
-          <Button type="button">
-            <span role="img" aria-label="Copy" title="Copy">
-              📋
-            </span>
+    <CodeContainer>
+      <CopyToClipboard
+        text={value}
+        onCopy={resolvedOnCopy || undefined}
+      >
+        <Column>
+          <Button height="24px" type="button">
+            <EmojiContainer>
+              <span role="img" aria-label="Copy" title="Copy">
+                📋
+              </span>
+            </EmojiContainer>
           </Button>
-        </CopyToClipboard>
+        </Column>
+      </CopyToClipboard>
+      <pre>
         <code>
           {value}
         </code>
-      </Code>
-    </div>
+      </pre>
+    </CodeContainer>
   </div>
 );
 
