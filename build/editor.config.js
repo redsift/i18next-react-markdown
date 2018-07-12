@@ -3,7 +3,7 @@ const path = require('path');
 const cwd = process.cwd();
 
 module.exports = {
-  input: path.join(cwd, 'Editor'),
+  input: path.join(cwd, 'components/Editor/index.jsx'),
   output: {
     file: path.join(cwd, 'dist/editor.js'),
     name: 'MarkdownEditor'

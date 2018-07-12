@@ -73,11 +73,9 @@ class Editor extends React.Component<Props, State> {
   mdParser: Function
 
   render() {
-    // const { t } = this.props;
     const { mdParser } = this;
     const { rawMarkdown, editing } = this.state;
 
-    // const placeholder = t('enter-raw-md', { __markdown: false });
     const placeholder = 'Enter raw text';
 
     const lines = rawMarkdown.split('\n');
