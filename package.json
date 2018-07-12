@@ -1,6 +1,6 @@
 {
   "name": "i18next-react-markdown",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Embed React elements using markdown in i18next translation strings",
   "module": "dist/i18next-react-markdown.esm.js",
   "jsnext:main": "dist/i18next-react-markdown.esm.js",
