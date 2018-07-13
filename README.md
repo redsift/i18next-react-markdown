@@ -32,6 +32,21 @@ npm run storybook:build
 
 This can be used in your own project and elements can be overriden with custom React components.
 
+Locale keys must have the suffix: `_md` to use markdown.
+
+### Locale usage
+
+Example locale JSON
+
+```json
+{
+  "website": "Website",
+  "website-header_md": "Visit $t(website)"
+}
+```
+
+> returns "`Visit Website`"
+
 ### i18next processor initialisation
 
 ```js

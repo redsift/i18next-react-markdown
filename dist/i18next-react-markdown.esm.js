@@ -356,6 +356,7 @@ var markdownProcessor = function markdownProcessor() {
     type: 'postProcessor',
     name: 'react-markdown',
     process: function process(value, key, options) {
+      if (!key.endsWith('_md')) return value;
       return options.__markdown === false
       ? value
       : parser(value);
