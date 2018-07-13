@@ -19,7 +19,7 @@
     "lint": "eslint 'src/**/*.{jsx,js}'",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "storybook:build": "build-storybook -c .storybook -o docs",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "flow": "flow"
   },
   "repository": {
