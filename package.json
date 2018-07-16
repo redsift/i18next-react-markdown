@@ -1,0 +1,70 @@
+{
+  "name": "i18next-react-markdown",
+  "version": "0.0.4",
+  "description": "Embed React elements using markdown in i18next translation strings",
+  "module": "dist/i18next-react-markdown.esm.js",
+  "jsnext:main": "dist/i18next-react-markdown.esm.js",
+  "main": "dist/i18next-react-markdown.umd.min.js",
+  "browser": "dist/i18next-react-markdown.umd.min.js",
+  "esnext": "src/index.js",
+  "scripts": {
+    "start": "npm run storybook",
+    "test": "npm run lint",
+    "uninstall": "rm -rf node_modules",
+    "clean": "rm -rf dist/",
+    "build:rollup": "rollup-bundler build/index.config.js",
+    "build:editor": "rollup-bundler build/editor.config.js",
+    "build:flow": "echo \"//@flow\n\nexport * from '../src';\n\nexport * from '../Editor';\" > dist/index.js.flow",
+    "build": "npm run clean && mkdir dist && npm run build:flow && npm run build:rollup && npm run build:editor",
+    "lint": "eslint 'src/**/*.{jsx,js}'",
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "storybook:build": "build-storybook -c .storybook -o docs",
+    "prepublishOnly": "npm run build",
+    "flow": "flow"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redsift/i18next-react-markdown.git"
+  },
+  "keywords": ["i18next", "markdown"],
+  "author": "macintoshhelper <github@macintoshhelper.com> (https://github.com/macintoshhelper)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/redsift/i18next-react-markdown/issues"
+  },
+  "homepage": "https://github.com/redsift/i18next-react-markdown#readme",
+  "devDependencies": {
+    "@redsift/rollup-bundler": "^0.5.10",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.5",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-flowtype": "^2.49.3",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.0",
+    "eslint-plugin-react": "^7.10.0",
+    "flow-bin": "^0.61.0",
+    "flow-typed": "^2.5.1"
+  },
+  "dependencies": {
+    "@storybook/addon-actions": "^3.4.8",
+    "@storybook/react": "^3.4.8",
+    "babelrc-rollup": "^3.0.0",
+    "marksy": "^6.0.3",
+    "react": "^15.6.2",
+    "react-copy-to-clipboard": "^5.0.1",
+    "react-dom": "^15.6.2",
+    "styled-components": "^3.3.3"
+  },
+  "peerDependencies": {
+    "react": "15.x",
+    "marksy": "6.x"
+  }
+}
