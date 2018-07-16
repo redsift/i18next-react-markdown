@@ -8452,24 +8452,46 @@ CopyToClipboard.CopyToClipboard = CopyToClipboard;
 var lib = CopyToClipboard;
 var lib_1 = lib.CopyToClipboard;
 
-var _templateObject$3 = _taggedTemplateLiteral(['\n  border: 1px solid blue;\n  color: blue;\n\n  font-size: 1rem;\n  line-height: 32px;\n  font-weight: 500;\n  text-decoration: none;\n  text-transform: uppercase;\n  -webkit-tap-highlight-color: transparent;\n  padding: 0 8px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  box-sizing: border-box;\n  ', '\n  ', '\n  outline: none;\n  user-select: none;\n  overflow: hidden;\n  vertical-align: middle;\n  border-radius: 2px;\n\n  &:focus {\n    outline: none;\n  }\n'], ['\n  border: 1px solid blue;\n  color: blue;\n\n  font-size: 1rem;\n  line-height: 32px;\n  font-weight: 500;\n  text-decoration: none;\n  text-transform: uppercase;\n  -webkit-tap-highlight-color: transparent;\n  padding: 0 8px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  box-sizing: border-box;\n  ', '\n  ', '\n  outline: none;\n  user-select: none;\n  overflow: hidden;\n  vertical-align: middle;\n  border-radius: 2px;\n\n  &:focus {\n    outline: none;\n  }\n']);
+var _templateObject$3 = _taggedTemplateLiteral(['\n  border: 1px solid blue;\n  color: blue;\n  background-color: ', ';\n  cursor: pointer;\n\n  font-size: 1rem;\n  line-height: 32px;\n  font-weight: 500;\n  text-decoration: none;\n  text-transform: uppercase;\n  -webkit-tap-highlight-color: transparent;\n  padding: 0 8px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  box-sizing: border-box;\n  ', '\n  ', '\n  outline: none;\n  user-select: none;\n  overflow: hidden;\n  vertical-align: middle;\n  border-radius: 2px;\n\n  &:focus {\n    outline: none;\n  }\n  &:hover {\n    \n  background-color: ', '\n  }\n'], ['\n  border: 1px solid blue;\n  color: blue;\n  background-color: ', ';\n  cursor: pointer;\n\n  font-size: 1rem;\n  line-height: 32px;\n  font-weight: 500;\n  text-decoration: none;\n  text-transform: uppercase;\n  -webkit-tap-highlight-color: transparent;\n  padding: 0 8px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  box-sizing: border-box;\n  ', '\n  ', '\n  outline: none;\n  user-select: none;\n  overflow: hidden;\n  vertical-align: middle;\n  border-radius: 2px;\n\n  &:focus {\n    outline: none;\n  }\n  &:hover {\n    \n  background-color: ', '\n  }\n']);
+var convertHex = function convertHex(input, opacity) {
+  try {
+    var hex = input.replace('#', '');
+    var r = parseInt(hex.substring(0, 2), 16);
+    var g = parseInt(hex.substring(2, 4), 16);
+    var b = parseInt(hex.substring(4, 6), 16);
+    return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + opacity / 100 + ')';
+  } catch (error) {
+    console.log({ error: error });
+    return input;
+  }
+};
 var Button = styled.button(_templateObject$3, function (_ref) {
-  var minWidth = _ref.minWidth;
-  return '' + (minWidth ? 'min-width: ' + minWidth : null);
+  var backgroundColor = _ref.backgroundColor;
+  return backgroundColor || 'white';
 }, function (_ref2) {
-  var height = _ref2.height;
+  var minWidth = _ref2.minWidth;
+  return '' + (minWidth ? 'min-width: ' + minWidth : null);
+}, function (_ref3) {
+  var height = _ref3.height;
   return '' + (height ? 'height: ' + height : null);
+}, function (_ref4) {
+  var backgroundColor = _ref4.backgroundColor;
+  if (backgroundColor) return convertHex(backgroundColor, 80);
+  return 'rgba(0, 0, 0, 0.05);';
 });
 
 var _templateObject$4 = _taggedTemplateLiteral(['\n  padding: 16px;\n  overflow: auto;\n  background-color: #f6f8fa;\n  border-radius: 3px;\n  display: flex;\n  flex-direction: row;\n'], ['\n  padding: 16px;\n  overflow: auto;\n  background-color: #f6f8fa;\n  border-radius: 3px;\n  display: flex;\n  flex-direction: row;\n']);
-var _templateObject2 = _taggedTemplateLiteral(['\n  display: flex;\n  align-items: center;\n  margin-right: 16px;\n'], ['\n  display: flex;\n  align-items: center;\n  margin-right: 16px;\n']);
-var _templateObject3 = _taggedTemplateLiteral(['\n  position: relative;\n  right: -2px;\n  font-size: 1rem;\n'], ['\n  position: relative;\n  right: -2px;\n  font-size: 1rem;\n']);
+var _templateObject2 = _taggedTemplateLiteral(['\n  display: flex;\n  align-items: center;\n  margin-right: 16px;\n  flex-direction: column;\n'], ['\n  display: flex;\n  align-items: center;\n  margin-right: 16px;\n  flex-direction: column;\n']);
+var _templateObject3 = _taggedTemplateLiteral(['\n  margin-top: 4px;\n  font-size: 12px;\n  color: blue;\n'], ['\n  margin-top: 4px;\n  font-size: 12px;\n  color: blue;\n']);
+var _templateObject4 = _taggedTemplateLiteral(['\n  position: relative;\n  right: -2px;\n  font-size: 1rem;\n'], ['\n  position: relative;\n  right: -2px;\n  font-size: 1rem;\n']);
 var CodeContainer = styled.div(_templateObject$4);
 var Column = styled.div(_templateObject2);
-var EmojiContainer = styled.div(_templateObject3);
+var InfoText = styled.span(_templateObject3);
+var EmojiContainer = styled.div(_templateObject4);
 var Copy = function Copy(_ref) {
   var value = _ref.value,
-      resolvedOnCopy = _ref.resolvedOnCopy;
+      resolvedOnCopy = _ref.resolvedOnCopy,
+      copied = _ref.copied;
   return React.createElement(
     'div',
     null,
@@ -8487,7 +8509,7 @@ var Copy = function Copy(_ref) {
           null,
           React.createElement(
             Button,
-            { height: '24px', type: 'button' },
+            { height: '24px', type: 'button', backgroundColor: copied ? '#006fce' : undefined },
             React.createElement(
               EmojiContainer,
               null,
@@ -8497,6 +8519,11 @@ var Copy = function Copy(_ref) {
                 '\uD83D\uDCCB'
               )
             )
+          ),
+          copied && React.createElement(
+            InfoText,
+            null,
+            'Copied'
           )
         )
       ),
@@ -8536,14 +8563,14 @@ var Editor = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Editor.__proto__ || _Object$getPrototypeOf(Editor)).call(this, props));
     _this.onTextChange = function (_ref2) {
       var value = _ref2.value;
-      _this.setState({ rawMarkdown: value });
+      _this.setState({ rawMarkdown: value, copied: false });
     };
     _this.onJsonChange = function (_ref3) {
       var value = _ref3.value;
       try {
         var parsedValue = JSON.parse(value);
         if (Array.isArray(parsedValue)) parsedValue = parsedValue.join('\n');
-        _this.setState({ rawMarkdown: parsedValue });
+        _this.setState({ rawMarkdown: parsedValue, copied: false });
       } catch (error) {
         console.log({ error: error });
       }
@@ -8552,7 +8579,8 @@ var Editor = function (_React$Component) {
         components = props.components;
     _this.state = {
       rawMarkdown: '',
-      editing: false
+      editing: false,
+      copied: false
     };
     _this.mdParser = createParser(elements, components);
     return _this;
@@ -8564,7 +8592,8 @@ var Editor = function (_React$Component) {
       var mdParser = this.mdParser;
       var _state = this.state,
           rawMarkdown = _state.rawMarkdown,
-          editing = _state.editing;
+          editing = _state.editing,
+          copied = _state.copied;
       var placeholder = 'Enter raw text';
       var lines = rawMarkdown.split('\n');
       var value = _JSON$stringify(lines.length === 1 ? rawMarkdown : lines, null, 2);
@@ -8623,7 +8652,11 @@ var Editor = function (_React$Component) {
               value: value
             }) : React.createElement(Copy, {
               value: value,
-              singleLine: false
+              singleLine: false,
+              copied: copied,
+              resolvedOnCopy: function resolvedOnCopy() {
+                return _this2.setState({ copied: true });
+              }
             }),
             React.createElement(
               CardActions,
@@ -8632,7 +8665,7 @@ var Editor = function (_React$Component) {
                 Button,
                 { type: 'button', onClick: function onClick() {
                     return _this2.setState({ editing: !editing });
-                  } },
+                  }, backgroundColor: editing ? '#006fce' : undefined },
                 'edit'
               )
             )
