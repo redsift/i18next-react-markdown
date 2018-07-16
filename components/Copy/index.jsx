@@ -20,6 +20,13 @@ const Column = styled.div`
   display: flex;
   align-items: center;
   margin-right: 16px;
+  flex-direction: column;
+`;
+
+const InfoText = styled.span`
+  margin-top: 4px;
+  font-size: 12px;
+  color: blue;
 `;
 
 const EmojiContainer = styled.div`
@@ -28,7 +35,9 @@ const EmojiContainer = styled.div`
   font-size: 1rem;
 `;
 
-const Copy = ({ value, resolvedOnCopy }: { value: string, resolvedOnCopy?: Function }) => (
+const Copy = (
+  { value, resolvedOnCopy, copied }: { value: string, resolvedOnCopy?: Function, copied?: boolean }
+) => (
   <div>
     <CodeContainer>
       <CopyToClipboard
@@ -36,13 +45,18 @@ const Copy = ({ value, resolvedOnCopy }: { value: string, resolvedOnCopy?: Funct
         onCopy={resolvedOnCopy || undefined}
       >
         <Column>
-          <Button height="24px" type="button">
+          <Button height="24px" type="button" backgroundColor={copied ? '#006fce' : undefined}>
             <EmojiContainer>
               <span role="img" aria-label="Copy" title="Copy">
                 📋
               </span>
             </EmojiContainer>
           </Button>
+          {copied && (
+            <InfoText>
+              Copied
+            </InfoText>
+          )}
         </Column>
       </CopyToClipboard>
       <pre>

@@ -1,9 +1,24 @@
 import styled from 'styled-components';
 
+const convertHex = (input, opacity) => {
+  try {
+    const hex = input.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+
+    return `rgba(${r}, ${g}, ${b}, ${opacity / 100})`;
+  } catch (error) {
+    console.log({ error });
+    return input;
+  }
+};
 
 const Button = styled.button`
   border: 1px solid blue;
   color: blue;
+  background-color: ${({ backgroundColor }) => backgroundColor || 'white'};
+  cursor: pointer;
 
   font-size: 1rem;
   line-height: 32px;
@@ -26,6 +41,14 @@ const Button = styled.button`
 
   &:focus {
     outline: none;
+  }
+  &:hover {
+    
+  background-color: ${({ backgroundColor }) => {
+    if (backgroundColor) return convertHex(backgroundColor, 80);
+
+    return 'rgba(0, 0, 0, 0.05);';
+  }}
   }
 `;
 

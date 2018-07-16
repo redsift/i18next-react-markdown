@@ -37,7 +37,8 @@ type Props = {
 
 type State = {
   rawMarkdown: string,
-  editing: boolean
+  editing: boolean,
+  copied: boolean
 };
 
 class Editor extends React.Component<Props, State> {
@@ -47,7 +48,8 @@ class Editor extends React.Component<Props, State> {
 
     this.state = {
       rawMarkdown: '',
-      editing: false
+      editing: false,
+      copied: false
     };
 
     this.mdParser = createMdParser(elements, components);
@@ -55,7 +57,7 @@ class Editor extends React.Component<Props, State> {
 
 
   onTextChange = ({ value }: any) => {
-    this.setState({ rawMarkdown: value });
+    this.setState({ rawMarkdown: value, copied: false });
   };
 
   onJsonChange = ({ value }: any) => {
@@ -64,7 +66,7 @@ class Editor extends React.Component<Props, State> {
 
       if (Array.isArray(parsedValue)) parsedValue = parsedValue.join('\n');
 
-      this.setState({ rawMarkdown: parsedValue });
+      this.setState({ rawMarkdown: parsedValue, copied: false });
     } catch (error) {
       console.log({ error });
     }
@@ -74,7 +76,7 @@ class Editor extends React.Component<Props, State> {
 
   render() {
     const { mdParser } = this;
-    const { rawMarkdown, editing } = this.state;
+    const { rawMarkdown, editing, copied } = this.state;
 
     const placeholder = 'Enter raw text';
 
@@ -124,11 +126,13 @@ class Editor extends React.Component<Props, State> {
                 <Copy
                   value={value}
                   singleLine={false}
+                  copied={copied}
+                  resolvedOnCopy={() => this.setState({ copied: true })}
                 />
               )
             }
             <CardActions>
-              <Button type="button" onClick={() => this.setState({ editing: !editing })}>
+              <Button type="button" onClick={() => this.setState({ editing: !editing })} backgroundColor={editing ? '#006fce' : undefined}>
                 edit
               </Button>
             </CardActions>
