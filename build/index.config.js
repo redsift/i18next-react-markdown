@@ -27,5 +27,5 @@ module.exports = {
       babelrc: false
     }
   },
-  external: ['react', 'marksy/components']
+  external: ['react', 'marksy']
 };

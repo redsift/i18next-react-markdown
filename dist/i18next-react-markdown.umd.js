@@ -1,6 +1,6 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('marksy/components')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'react', 'marksy/components'], factory) :
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('marksy')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'react', 'marksy'], factory) :
 	(factory((global.I18nextReactMarkdown = {}),global.react,global.marksy));
 }(this, (function (exports,react,marksy) { 'use strict';
 

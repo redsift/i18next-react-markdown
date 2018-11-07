@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import marksy from 'marksy/components';
+import marksy from 'marksy';
 
 function unwrapExports (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;

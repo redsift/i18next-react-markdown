@@ -2,7 +2,7 @@
 
 import { createElement as reactCreateElement } from 'react';
 // $FlowFixMe
-import marksy from 'marksy/components';
+import marksy from 'marksy';
 
 import type { Node as ReactNode } from 'react';
 
